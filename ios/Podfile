@@ -1,0 +1,80 @@
+# Podfile — flutter-smart-workforce-management
+platform :ios, '14.0'
+ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+
+def flutter_root
+  generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
+  unless File.exist?(generated_xcode_build_settings_path)
+    raise "#{generated_xcode_build_settings_path} must exist."
+  end
+  File.foreach(generated_xcode_build_settings_path) do |line|
+    matches = line.match(/FLUTTER_ROOT\=(.*)/)
+    return matches[1].strip if matches
+  end
+  raise "FLUTTER_ROOT not found"
+end
+
+require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), flutter_root)
+flutter_ios_podfile_setup
+
+target 'Runner' do
+  use_frameworks!
+  use_modular_headers!
+  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+
+  # ==================== FIREBASE ====================
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Crashlytics'
+  pod 'Firebase/Performance'
+
+  # ==================== GOOGLE MAPS & LOCATION ====================
+  pod 'GoogleMaps', '~> 8.4'
+  pod 'Google-Maps-iOS-Utils', '~> 4.2'
+
+  # ==================== LOCATION (CoreLocation is system — no pod) ====================
+  # background_fetch Flutter plugin handles background fetch natively
+  # geolocator Flutter plugin wraps CLLocationManager natively
+
+  # ==================== NETWORKING ====================
+  pod 'Alamofire', '~> 5.8'
+
+  # ==================== SECURITY ====================
+  pod 'SQLCipher', '~> 4.5'
+  pod 'KeychainAccess', '~> 4.2'
+
+  # ==================== CAMERA (QR/barcode) ====================
+  pod 'ZXingObjC', '~> 3.6'
+
+  # ==================== CHARTS (Dashboard analytics) ====================
+  pod 'Charts', '~> 5.0'
+
+  # ==================== UI ====================
+  pod 'lottie-ios', '~> 4.3'
+  pod 'SDWebImage', '~> 5.18'
+  pod 'IQKeyboardManagerSwift', '~> 6.5'
+
+  # ==================== PDF GENERATION (Reports) ====================
+  pod 'TPPDF', '~> 2.5'
+
+  target 'RunnerTests' do
+    inherit! :search_paths
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    flutter_additional_ios_build_settings(target)
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
+      config.build_settings['SWIFT_VERSION'] = '5.9'
+      config.build_settings['ENABLE_BITCODE'] = 'NO'
+      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+      config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO' if ENV['CI']
+    end
+  end
+end
