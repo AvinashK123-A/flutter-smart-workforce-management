@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>$(DEVELOPMENT_LANGUAGE)</string>
+    <key>CFBundleDisplayName</key>
+    <string>Workforce Manager</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>flutter_smart_workforce_management</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>$(FLUTTER_BUILD_NAME)</string>
+    <key>CFBundleVersion</key>
+    <string>$(FLUTTER_BUILD_NUMBER)</string>
+
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <false/>
+    </dict>
+
+    <!-- ==================== LOCATION PERMISSIONS ==================== -->
+    <!-- When In Use location (for active attendance tracking) -->
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Workforce Manager uses your location to verify attendance at your workplace and track your work route.</string>
+
+    <!-- Always location (REQUIRED for geofencing and background tracking) -->
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Workforce Manager needs continuous location access to automatically record check-in/check-out when you enter or leave office geofence zones, even when the app is in the background.</string>
+
+    <!-- Required for iOS 10 and earlier (kept for compatibility) -->
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Workforce Manager requires location access in background for automatic attendance tracking and geofence-based check-in/check-out.</string>
+
+    <!-- ==================== CAMERA (QR Attendance) ==================== -->
+    <key>NSCameraUsageDescription</key>
+    <string>Workforce Manager uses camera to scan QR codes for attendance verification and document capture.</string>
+
+    <!-- ==================== FACE ID ==================== -->
+    <key>NSFaceIDUsageDescription</key>
+    <string>Workforce Manager uses Face ID to securely confirm your attendance check-in.</string>
+
+    <!-- ==================== MOTION (Activity Recognition) ==================== -->
+    <key>NSMotionUsageDescription</key>
+    <string>Workforce Manager uses motion data to improve location accuracy and detect commute patterns.</string>
+
+    <!-- ==================== PHOTO LIBRARY (Report screenshots) ==================== -->
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Workforce Manager needs photo library access to save attendance reports and documents.</string>
+
+    <!-- ==================== NOTIFICATIONS ==================== -->
+    <key>NSUserNotificationsUsageDescription</key>
+    <string>Workforce Manager sends notifications for shift reminders, attendance alerts, task assignments, and system updates.</string>
+
+    <!-- ==================== BACKGROUND MODES ==================== -->
+    <key>UIBackgroundModes</key>
+    <array>
+        <!-- CRITICAL: Required for background location tracking -->
+        <string>location</string>
+        <string>fetch</string>
+        <string>remote-notification</string>
+        <string>processing</string>
+    </array>
+
+    <!-- ==================== GOOGLE MAPS ==================== -->
+    <key>GMSApiKey</key>
+    <string>$(MAPS_API_KEY)</string>
+
+    <!-- ==================== URL SCHEMES ==================== -->
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+            <string>com.avinash.workforce.management</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>workforceapp</string>
+            </array>
+        </dict>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+            <string>REVERSED_CLIENT_ID</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.YOUR_REVERSED_CLIENT_ID</string>
+            </array>
+        </dict>
+    </array>
+
+    <!-- Associated domains -->
+    <key>com.apple.developer.associated-domains</key>
+    <array>
+        <string>applinks:workforce.com</string>
+    </array>
+
+    <key>FirebaseAppDelegateProxyEnabled</key>
+    <false/>
+
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
+
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+    </array>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
+    <key>CADisableMinimumFrameDurationOnPhone</key>
+    <true/>
+    <key>UIApplicationSupportsIndirectInputEvents</key>
+    <true/>
+
+    <!-- Build config variables -->
+    <key>ENVIRONMENT</key>
+    <string>$(ENVIRONMENT)</string>
+    <key>API_BASE_URL</key>
+    <string>$(API_BASE_URL)</string>
+    <key>MAPS_API_KEY</key>
+    <string>$(MAPS_API_KEY)</string>
+    <key>GEOFENCE_RADIUS_METERS</key>
+    <string>$(GEOFENCE_RADIUS_METERS)</string>
+</dict>
+</plist>
